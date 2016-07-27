@@ -4,9 +4,7 @@ $(function(){
     event.preventDefault();
     var searchTerm = $('#search-input').val();
     getRequest(searchTerm);
-    showResults(results);
   });
-});
 
 function getRequest(searchTerm){
   var params = {
@@ -18,15 +16,18 @@ function getRequest(searchTerm){
 
   $.getJSON(url, params, function(data){
     console.log(data.items[0]);
+
+  var html = "";
+  for (var i in data.items) {
+    var item = data.items[i];
+    html += '<a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" target="_blank"><img src="' + item.snippet.thumbnails.medium.url + '"></a>';
+$('#search-results').html(html);
+  };
+
       });
 }
 
-function showResults(results){
-  var html = "";
-  for (var i in data.items) {
-  	var item = data.items[i];
-    html += '<img src="' + item.snippet.thumbnails.medium.url + '">';
+});
 
-  };
-  $('#search-results').html(html);
-}
+
+//https://www.youtube.com/watch?v=
